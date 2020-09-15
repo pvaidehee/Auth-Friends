@@ -1,42 +1,58 @@
-import React from "react";
-import axiosWithAuth from "../utils/axiosWithAuth";
+import React, { useState, useEffect } from "react";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
+import Friend from "./Friend";
+import AddFriendForm from "./AddFriendForm";
 
-class FriendsList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      friendslist: [],
-    };
-  }
+const FriendsList = () => {
+  const [list, setList] = useState([]);
+  const [friend, setFriend] = useState({ name: "", age: "", email: "" });
 
-  getData = () => {
+  useEffect(() => {
+    getList();
+  }, []);
+
+  const getList = () => {
     axiosWithAuth()
-      .get("http://localhost:5000/api/friends")
+      .get("/api/friends")
       .then((res) => {
-        this.setState({
-          friendslist: res.data,
-        });
+        setList(res.data);
       })
-      .catch((err) => console.log([err]));
+      .catch((err) => console.log(err));
   };
 
-  componentDidMount() {
-      this.getData();
-  }
+  const changeHandle = (e) => {
+    setFriend({
+      ...friend,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const onSubmit = (e) => {
+    axiosWithAuth()
+      .post("/api/friends", friend)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+    setFriend({ name: "", age: "", email: "" });
+  };
 
-  render() {
-    return (
-      <div>
-          <h1>Friends List</h1>
-        {this.state.friendslist.map((friend) => (
-          <div>
-            <p>Name: {friend.name}</p>
-            <p>Age: {friend.age}</p>
-            <p>Email: {friend.email}</p>
-          </div>
-        ))}
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <section>
+        <AddFriendForm
+          changeHandle={changeHandle}
+          submit={onSubmit}
+          friend={friend}
+        />
+      </section>
+
+      <section>
+        {list.map((friend) => {
+          return <Friend key={friend.id} friend={friend} setList={setList} />;
+        })}
+      </section>
+    </div>
+  );
+};
+
 export default FriendsList;
