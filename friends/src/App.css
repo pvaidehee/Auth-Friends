@@ -1,0 +1,27 @@
+body {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  background-color: lightseagreen;
+  color:orange;
+}
+
+p{
+  font-size: 30px;
+}
+ h1{
+   font-size: 40px;
+ }
+
+input{
+  border-radius: 15px;
+  margin:200px 10px;
+  background-color: lightgray ;
+}
+
+button{
+  color:whitesmoke;
+  border-radius: 10px;
+  background-color: rgb(187, 31, 83);
+  padding: 5px 25px;
+}
