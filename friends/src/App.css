@@ -1,0 +1,52 @@
+.App {
+  text-align: center;
+  width:40%;
+  margin-top:30px;
+}
+
+.applogin
+{
+  color:orangered;
+  font-size: 2rem;
+  margin-right:40px;
+}
+.appfriends{
+  color:orangered;
+  font-size: 2rem;
+  margin-left: 40px;
+}
+
+.formlog input{
+  width:160px;
+  height:20px;
+  margin: 0 10px;
+}
+
+.formlog{
+color:orange;
+margin-top: 40px;
+padding:10px 0;
+}
+button{
+  margin-top:20px ;
+  background-color: peachpuff;
+  width: 70px;
+  height:30px;
+  border-radius: 40%;
+}
+
+
+.secfriends{
+  color:hotpink
+}
+.formaddfriend{
+  align-items: center;
+  margin:20px 0;
+  color:lightseagreen;
+  display: flex;
+  flex-direction: column;
+}
+.formaddfriend input{
+  width:50%;
+  margin:10px 0;
+}
